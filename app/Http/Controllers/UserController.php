@@ -41,6 +41,7 @@ class UserController extends Controller
             'email'     => $request->email,
             'password'  => Hash::make($request->password),
             'user_type' => $request->user_type,
+            'first_login' => true,
         ]);
 
         // Create user profile

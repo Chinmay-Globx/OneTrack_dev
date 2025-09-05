@@ -74,27 +74,44 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 $(document).ready(function () {
+    console.log('jQuery loaded, starting dropdown initialization...');
+    
     // Load dropdown data
-    $.get('/departments', function(data) {
-        $('#departmentDropdown').append('<option value="">-- Select --</option>');
-        data.forEach(function(item) {
-            $('#departmentDropdown').append(`<option value="${item.id}">${item.name}</option>`);
+    $.get('/departments')
+        .done(function(data) {
+            console.log('Departments loaded:', data);
+            $('#departmentDropdown').append('<option value="">-- Select --</option>');
+            data.forEach(function(item) {
+                $('#departmentDropdown').append(`<option value="${item.id}">${item.name}</option>`);
+            });
+        })
+        .fail(function(xhr, status, error) {
+            console.error('Error loading departments:', error, xhr.responseText);
         });
-    });
 
-    $.get('/designations', function(data) {
-        $('#designationDropdown').append('<option value="">-- Select --</option>');
-        data.forEach(function(item) {
-            $('#designationDropdown').append(`<option value="${item.id}">${item.name}</option>`);
+    $.get('/designations')
+        .done(function(data) {
+            console.log('Designations loaded:', data);
+            $('#designationDropdown').append('<option value="">-- Select --</option>');
+            data.forEach(function(item) {
+                $('#designationDropdown').append(`<option value="${item.id}">${item.name}</option>`);
+            });
+        })
+        .fail(function(xhr, status, error) {
+            console.error('Error loading designations:', error, xhr.responseText);
         });
-    });
 
-    $.get('/user-types', function(data) {
-        $('#userTypeDropdown').append('<option value="">-- Select --</option>');
-        data.forEach(function(item) {
-            $('#userTypeDropdown').append(`<option value="${item.id}">${item.name}</option>`);
+    $.get('/user-types')
+        .done(function(data) {
+            console.log('User types loaded:', data);
+            $('#userTypeDropdown').append('<option value="">-- Select --</option>');
+            data.forEach(function(item) {
+                $('#userTypeDropdown').append(`<option value="${item.id}">${item.name}</option>`);
+            });
+        })
+        .fail(function(xhr, status, error) {
+            console.error('Error loading user types:', error, xhr.responseText);
         });
-    });
 
     // Handle form submit
     $('#userForm').submit(function(e) {

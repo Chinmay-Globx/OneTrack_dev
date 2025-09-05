@@ -13,10 +13,15 @@ class Users extends Authenticatable
     protected $fillable = [
         'email',
         'password',
-        'user_type'
+        'user_type',
+        'first_login'
     ];
 
     protected $hidden = ['password'];
+
+    protected $casts = [
+        'first_login' => 'boolean',
+    ];
 
     public function profile()
     {
